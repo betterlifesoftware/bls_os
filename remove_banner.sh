@@ -1,3 +1,4 @@
+#!/bin/sh
 rm /boot/dietpi/func/dietpi-banner
 sed -i '256d' /boot/dietpi/dietpi-login
 sed -i '237d' /boot/dietpi/dietpi-login
