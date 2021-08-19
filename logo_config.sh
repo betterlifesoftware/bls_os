@@ -1,8 +1,17 @@
 #!/bin/sh
 filename='/boot/cmdline.txt'
 line=$(head -n 1 $filename)
-partUUID=$(echo $line | cut -c14-38)
+search="root=PARTUUID="
+
+prefix=${line%%$search*}
+start=${#prefix}
+
+end=$(($start + 25))
+echo $start
+echo $end
+partUUID=$(echo $line | cut -c$prefix-$end)
 echo $partUUID
+
 str1=' console=tty3 '
 str2=' rootfstype=ext4 elevator=deadline fsck.repair=yes quiet rootwait quiet net.ifnames=0 plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0 rd.plymouth=0 plymouth.enable=0 consoleblank=0 quiet loglevel=0 quiet rd.systemd.show_status=false rd.udev.log_level=0 udev.log_level=0 plymouth.ignore-serial-consoles rd.udev.log-priority=3 udev_log=3'
 newline=$str1$partUUID$str2
