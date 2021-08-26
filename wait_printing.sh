@@ -9,7 +9,7 @@
 # Description:       Something else
 ### END INIT INFO
 
-inotifywait -m /printing -e create -e moved_to |
+inotifywait -m /printing |
     while read dir action file; do
         echo "The file '$file' appeared in directory '$dir' via '$action'"
         echo $file
